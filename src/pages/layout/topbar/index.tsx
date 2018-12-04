@@ -39,5 +39,5 @@ class TopBar extends React.Component<{}, {}> {
   }
 }
 
-export default withRouter(TopBar);
-//export default TopBar;
+//export default withRouter(TopBar);
+export default TopBar;

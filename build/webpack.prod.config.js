@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const ZipPlugin = require("zip-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const GitRevisionPlugin = require("git-revision-webpack-plugin")
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 //   .BundleAnalyzerPlugin
@@ -20,42 +20,69 @@ const extractCss = new ExtractTextPlugin({
 const prodWebpackConfig = merge(baseConfig, {
     mode: 'production',
     devtool: "#source-map",
+    optimization: {
+        // minimizer: [
+        //     new UglifyJsPlugin({
+        //         uglifyOptions: {
+        //             compress: {
+        //                 warnings: false,
+        //                 screw_ie8: true,
+        //                 sequences: true,
+        //                 dead_code: true,
+        //                 drop_debugger: true,
+        //                 comparisons: true,
+        //                 conditionals: true,
+        //                 evaluate: true,
+        //                 booleans: true,
+        //                 loops: true,
+        //                 unused: true,
+        //                 hoist_funs: true,
+        //                 if_return: true,
+        //                 join_vars: true,
+        //                 cascade: true,
+        //                 drop_console: true,
+        //             },
+        //             output: {
+        //                 comments: false,
+        //             },
+        //         }
+        //     })
+        // ],
+        splitChunks: {
+            chunks: 'async',
+            minSize: 30000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            name: true,
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                }
+            }
+        }
+
+    },
     plugins: [
         new CleanWebpackPlugin(["dist"], {
             root: path.resolve(__dirname, "../"),
             verbose: true,
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                sequences: true,
-                dead_code: true,
-                drop_debugger: true,
-                comparisons: true,
-                conditionals: true,
-                evaluate: true,
-                booleans: true,
-                loops: true,
-                unused: true,
-                hoist_funs: true,
-                if_return: true,
-                join_vars: true,
-                cascade: true,
-                drop_console: true,
-            },
-            output: {
-                comments: false,
-            },
-        }),
-        extractCss, 
+        //extractCss,
         new HtmlWebpackPlugin({
             template: "../index.html",
             filename: "index.html",
-            favicon: path.join(__dirname, "../src/atlas/assets/favicon.ico"),
+            favicon: path.join(__dirname, "../src/assets/favicon.ico"),
             inject: true,
-            chunks: ["manifest", "vendor", "demo"],
-            env: process.env.NODE_ENV,
+            // chunks: ["manifest", "vendor", "demo"],
+            // env: process.env.NODE_ENV,
         }),
         new ZipPlugin({
             filename: "react-demo",

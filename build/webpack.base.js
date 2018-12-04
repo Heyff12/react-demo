@@ -1,13 +1,9 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
 const webpack = require('webpack'); // 用于访问内置插件
 const utils = require("./utils");
-const proxy = require("./proxy.config")
 const resolve = require("./webpack.resolve.config")
 const theme = require("../src/styles/themeConfig")
 const tsImportPluginFactory = require("ts-import-plugin")
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
-const ForkTsCheckerNotifierWebpackPlugin = require("fork-ts-checker-notifier-webpack-plugin")
 
 
 module.exports = {
@@ -136,16 +132,4 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        // new ForkTsCheckerNotifierWebpackPlugin({
-        //     title: "React-demo typescript error",
-        // }),
-        new ForkTsCheckerWebpackPlugin({
-            tsconfig: path.resolve(__dirname, "../tsconfig.json"),
-            tslint: path.resolve(__dirname, "../tslint.json"),
-        }),
-        new HtmlWebpackPlugin({
-            template: '../index.html'
-        })
-    ]
 };
