@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config build/webpack.dev.config.js --progress",
-    "build": "webpack --config build/webpack.prod.config.js"
+    "build": "webpack --config build/webpack.prod.config.js",
+    "test": "echo `I am test`"
   },
   "keywords": [],
   "author": "",
