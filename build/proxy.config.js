@@ -21,6 +21,6 @@ ${target}\n`)
 module.exports = {
   context: pathname =>
     !!pathname.match("^/api") || !!pathname.match("^/log(in|out)"),
-  target: mockData.devProxy,
+  target: mockData.local,
   changeOrigin: true,
 }

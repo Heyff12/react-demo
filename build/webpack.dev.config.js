@@ -40,9 +40,10 @@ const devWebpackConfig = merge(baseConfig, {
             warnings: true,
             errors: true
         },
+        disableHostCheck: true,
     },
-    plugins:[
-        new webpack.HotModuleReplacementPlugin(),    
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         // new ForkTsCheckerNotifierWebpackPlugin({
         //     title: "React-demo typescript error",
