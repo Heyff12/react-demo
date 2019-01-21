@@ -1,63 +1,20 @@
 stages:
-  - install_deps
-  - test
   - build
-  # - deploy_test
-  # - deploy_production
+  - test
 
-cache:
-  key: ${CI_BUILD_REF_NAME}
-  paths:
-    - node_modules/
-    - dist/
+before_script:
+  - echo "Restoring Packages..."
 
-
-# 安装依赖
-install_deps:
-  stage: install_deps
-  only:
-    - develop
-    - master
-  script:
-    - npm install
-
-
-# 运行测试用例
-test:
-  stage: test
-  only:
-    - develop
-    - master
-  script:
-    - npm run test
-
-
-# 编译
-build:
+build_job:
   stage: build
-  only:
-    - develop
-    - master
   script:
-    - npm run clean
-    - npm run build:client
-    - npm run build:server
+  - echo "Release build..."
+  except:
+  - tags
 
-
-# 部署测试服务器
-deploy_test:
-  stage: deploy_test
-  only:
-    - develop
+test_job:
+  stage: test
   script:
-    - pm2 delete app || true
-    - pm2 start app.js --name app
-
-
-# 部署生产服务器
-deploy_production:
-  stage: deploy_production
-  only:
-    - master
-  script:
-    - bash scripts/deploy/deploy.sh
+  - echo "Tests run..."
+  - cd cds.ci.test
+  - gradle test
