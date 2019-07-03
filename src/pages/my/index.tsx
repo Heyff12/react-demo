@@ -6,6 +6,7 @@ class My extends React.Component<{}, {}> {
       <>
         <h1>个人主页!</h1>
         <p>ip更换后测试</p>
+        <p>ip更换后测试--第二次</p>
       </>
     );
   }
