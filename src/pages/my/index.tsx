@@ -5,6 +5,7 @@ class My extends React.Component<{}, {}> {
     return (
       <>
         <h1>个人主页!</h1>
+        <p>ip更换后测试</p>
       </>
     );
   }
