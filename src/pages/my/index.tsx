@@ -8,6 +8,7 @@ class My extends React.Component<{}, {}> {
         <p>ip更换后测试</p>
         <p>ip更换后测试--第二次</p>
         <p>ip更换后测试--第san次aliyun2222--hook--ali</p>
+        <p>ip更换后测试--jenkins ipd</p>
       </>
     );
   }
