@@ -13,9 +13,17 @@ addons:
   ssh_known_hosts:
   - 182.92.75.69
 before_script: 
+
 script:
 - npm run build
+
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_70e5cdf8cfb1_key -iv $encrypted_70e5cdf8cfb1_iv
   -in id_rsa_git.enc -out ~/.ssh/id_rsa_git -d
 - chmod 600 ~/.ssh/id_rsa_git
+
+after_success:
+ - chmod 600 ~/.ssh/id_rsa_git
+ - scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo
+
