@@ -1,17 +1,23 @@
 language: node_js
 node_js:
 - 10.9.0
+
 brancher:
   only:
-  - master
+  - master  
+
 cache:
   directories:
-  - node_modules
+  - node_modules  
+
 install:
-- npm install
+- npm install 
+
+
 addons:
   ssh_known_hosts:
-  - 182.92.75.69
+  - 182.92.75.69 
+
 before_script: 
 
 script:
@@ -25,5 +31,6 @@ before_install:
 
 after_success:
  - chmod 600 ~/.ssh/id_rsa_git
- - scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo
+ - scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
+ - scp -r ./dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
 
