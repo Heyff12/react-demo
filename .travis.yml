@@ -1,13 +1,42 @@
 language: node_js
 node_js:
-  - "10"
+  - "10.9.0"
 brancher:
   only:
     - "master"
+
+# Travis-CI Caching
+cache:
+  directories:
+    - node_modules
+
 install:
   - "npm install"
+
+# 可以添加多个主机或IP作为列表（用于等下测试成功后发布到指定服务器上），默认只通信github,如果只在github上面，下面的可以忽略
+addons:
+  ssh_known_hosts:
+  - 182.92.75.69
+
+before_script:
+
 script:
   - "npm run build"
+
+# after_success:
+# - ssh ubuntu@123.123.123.123 'cd ~/projects/proj && git pull && pkill uwsgi'
+
+
+# before_install:
+# - openssl aes-256-cbc -K $encrypted_2bc13221a680_key -iv $encrypted_2bc13221a680_iv
+#   -in id_rsa_deploy.enc -out ~/.ssh/id_rsa -d
+# - chmod 600 ~/.ssh/id_rsa
+#   # - cp .travis/ssh_config ~/.ssh/config
+# addons:
+#     ssh_known_hosts: 123.123.123.123
+# after_success:
+# - ssh -tt ubuntu@123.123.123.123 < run.sh
+
 
 # GitHub Pages 部署
 # deploy:
