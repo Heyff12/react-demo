@@ -12,7 +12,7 @@ cache:
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_70e5cdf8cfb1_key -iv $encrypted_70e5cdf8cfb1_iv
-  -in id_rsa_git.enc -out ~/.ssh/id_rsa_git -d
+  -in .travis/id_rsa_git.enc -out ~/.ssh/id_rsa_git -d
 - chmod 600 ~/.ssh/id_rsa_git
 
 install:
@@ -23,9 +23,10 @@ before_script:
 script:
 - npm run build
 
-after_success:
-- scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
-
 addons:
   ssh_known_hosts:
   - 182.92.75.69 
+
+after_success:
+- ssh root@182.92.75.69 "/nodeweb/ciweb/reactdemo/.travis/deploy.sh"
+# - scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
