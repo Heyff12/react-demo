@@ -29,5 +29,5 @@ addons:
 
 after_success:
 - pwd
+- scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
 # - ssh -o StrictHostKeyChecking=no root@182.92.75.69 "/nodeweb/ciweb/reactdemo/.travis/deploy.sh"
-# - scp -r dist/ root@182.92.75.69:/nodeweb/ciweb/reactdemo/
