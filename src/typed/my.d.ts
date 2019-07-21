@@ -1,0 +1,3 @@
+interface IMy {
+    name: string
+}

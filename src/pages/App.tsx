@@ -11,7 +11,7 @@ class App extends React.Component<{}, {}> {
       <>
         <TopBar />
         <Switch>
-          <Route path="/" exact={true} component={Home} />
+          <Route path="/" exact={true} component={Home}/>
           <Route path="/my" component={My} />
         </Switch>
       </>
