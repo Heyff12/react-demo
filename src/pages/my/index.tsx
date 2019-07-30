@@ -4,27 +4,27 @@ import {setName} from '../../store/actions/my'
 
 const mapStateToProps = (state: IMy) => {
   return {
-    name: state.name,
+    name: state.my.name,
   }
 }
 
 const mapDispatchToProps = (dispatch) => (
   {
-  setName: (name:string) => dispatch(setName(name))
+  setName: (payload:IMy) => dispatch(setName(payload))
 })
 
 // type DispatchProps = typeof mapDispatchToProps
 
 type Props = {
   name: string
-  newName: string
+  setName: () => void
 } 
 
-class My extends React.Component<{}, {}> {
+class My extends React.Component<Props, {}> {
 
   componentDidMount(){
     console.log('componentDidMount')
-    // console.log(this.props.name)
+    console.log(this.props.name)
   }
 
   render() {
@@ -35,11 +35,11 @@ class My extends React.Component<{}, {}> {
         <p>ip更换后测试--第二次</p>
         <p>ip更换后测试--第san次aliyun2222--hook--ali</p>
         <p>ip更换后测试--jenkins ipd</p>
+        <h2>name:{this.props.name}</h2>
+        <button onClick={()=>this.props.setName({name:'newSecondNameHAha'})}>设置name</button>
       </>
     );
   }
 }
 
-// export default My;
-export default connect()(My)
-// export default connect(mapStateToProps,mapDispatchToProps)(My);
+export default connect(mapStateToProps,mapDispatchToProps)(My);

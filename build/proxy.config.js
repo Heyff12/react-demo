@@ -3,10 +3,9 @@ const yargs = require("yargs").argv
 const { env } = yargs
 const mockData = {
   local: "http://localhost:8080", // docker mock data
-  uat: "https://uat-atlas.nevext.com/",
-  dev: "https://dev-atlas.nevext.com/",
-  qauat: "https://qa-atlas.nevext.com",
-  devProxy: "https://niodev.ap.ngrok.io/",
+  uat: "https://uat-yaya.com/",
+  dev: "https://dev-yaya.com/",
+  qauat: "https://qa-yaya.com"
 }
 
 // eg cli: `yarn start --env.m local`

@@ -1,14 +1,23 @@
-import * as React from "react"
-import { Route,Switch,HashRouter as Router } from "react-router-dom"
-import App from "./pages/App"
+import * as React from "react";
+import TopBar from "./pages/layout/topbar";
+import Home from "./pages/home";
+import My from "./pages/my";
+import { Route, Switch } from "react-router-dom"
 
 
-export default class Root extends React.Component<{}, {}> {
+class Root extends React.Component<{}, {}> {
   render() {
     return (
-      <Router>
-          <Route path="/" component={App} />
-      </Router>
-    )
+      <>
+        <TopBar />
+        <Switch>
+          <Route path="/" exact={true} component={Home}/>
+          <Route path="/my" component={My} />
+        </Switch>
+      </>
+    );
   }
 }
+
+export default Root;
+

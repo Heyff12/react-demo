@@ -1,7 +1,24 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from "redux";
 
-import reducers from './reducers'
+import { routerMiddleware } from "connected-react-router";
 
-const store = createStore(reducers)
+import createRootReducer from "./reducers";
+import history from "../utils/history";
 
-export default store
+let store;
+if (process.env.NODE_ENV === "development") {
+    const composeEnhancers =
+        typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+            ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+            : compose;
+
+    const enhancer = composeEnhancers(applyMiddleware(routerMiddleware(history)));
+    store = createStore(createRootReducer(history), {}, enhancer);
+} else {
+    store = createStore(
+        createRootReducer(history),
+        {},
+        compose(applyMiddleware(routerMiddleware(history)))
+    );
+}
+export default store;
