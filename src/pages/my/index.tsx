@@ -1,16 +1,20 @@
 import * as React from "react";
 import { connect } from 'react-redux'
 import {setName} from '../../store/actions/my'
+import {IRedux,my} from '../../typed/my.d'
 
-const mapStateToProps = (state: IMy) => {
+const mapStateToProps = (state: IRedux.IMy) => {
+  console.log('-----mapStateToProps----')
+  console.log(state)
   return {
-    name: state.my.name,
+    name: state.my.getIn(['name']),
+    // name: state.my.name,
   }
 }
 
 const mapDispatchToProps = (dispatch) => (
   {
-  setName: (payload:IMy) => dispatch(setName(payload))
+  setName: (payload:my) => dispatch(setName(payload))
 })
 
 // type DispatchProps = typeof mapDispatchToProps

@@ -1,6 +1,14 @@
-import { My } from "../actionTypes"
+import { createAction } from "redux-actions"
 
-export const setName = (name:string) => ({
-  type: My.SET_NAME,
-  name: name,
-})
+import { My } from "../actionTypes"
+import { my } from "../../typed/my.d";
+
+// export const setName = (name:string) => ({
+//   type: My.SET_NAME,
+//   name: name,
+// })
+
+export const setName = createAction(
+  My.SET_NAME,
+  (payload: my) => payload
+)
